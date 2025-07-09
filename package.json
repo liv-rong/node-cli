@@ -3,10 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "build:all": "pnpm -r --filter=./apps/* run build",
+    "test:all": "pnpm -r run test",
+    "start:web": "pnpm --filter web-app run start",
+    "start:api": "pnpm --filter api-server run start"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.11",
+    "typescript": "^5.8.3"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }
