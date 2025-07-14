@@ -93,7 +93,11 @@ importers:
         specifier: ^11.0.4
         version: 11.0.4
 
-  packages/create: {}
+  packages/create:
+    dependencies:
+      '@starry-sky-studio/cli':
+        specifier: workspace:^
+        version: link:../cli
 
   packages/template-react: {}
 
