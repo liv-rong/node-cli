@@ -1,6 +1,6 @@
 {
-  "name": "@guang-cli/template-react",
-  "version": "1.3.2",
+  "name": "@starry-sky-studio/template-react",
+  "version": "1.3.3",
   "publishConfig": {
     "access": "public"
   },

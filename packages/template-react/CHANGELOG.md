@@ -1,5 +1,11 @@
 # @guang-cli/template-react
 
+## 1.3.3
+
+### Patch Changes
+
+-
+
 ## 1.3.2
 
 ### Patch Changes
