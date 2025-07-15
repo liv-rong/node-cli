@@ -9,7 +9,13 @@ export function getNpmRegistry() {
 // 获取 npm 包信息
 export async function getNpmInfo(packageName: string) {
   const register = getNpmRegistry()
-  const url = urlJoin(register, packageName)
+
+  // 修复：对作用域包名进行编码
+  const encodedName = packageName.startsWith('@')
+    ? `@${encodeURIComponent(packageName.substring(1))}`
+    : packageName
+
+  const url = urlJoin(register, encodedName)
   console.log('Fetching package info from:', url)
 
   try {

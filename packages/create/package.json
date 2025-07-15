@@ -18,6 +18,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@starry-sky-studio/cli": "workspace:^"
+    "@inquirer/prompts": "^7.6.0",
+    "@starry-sky-studio/cli": "workspace:^",
+    "@starry-sky-studio/utils": "workspace:^",
+    "ora": "^8.2.0"
   }
 }
