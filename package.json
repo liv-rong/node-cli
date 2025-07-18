@@ -13,7 +13,9 @@
   "type": "commonjs",
   "devDependencies": {
     "@changesets/cli": "^2.29.5",
+    "@types/node": "^24.0.14",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-packagejson": "^2.5.18"
+    "prettier-plugin-packagejson": "^2.5.18",
+    "typescript": "^5.8.3"
   }
 }

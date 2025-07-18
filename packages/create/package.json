@@ -1,6 +1,6 @@
 {
   "name": "@starry-sky-studio/my-create",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
@@ -13,5 +13,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@inquirer/prompts": "^7.6.0",
+    "@starry-sky-studio/my-utils": "workspace:*",
+    "ora": "^8.2.0",
+    "fs-extra": "^11.3.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4"
+  }
 }
