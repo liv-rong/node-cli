@@ -4,6 +4,8 @@ import { NpmPackage } from '@starry-sky-studio/my-utils'
 import path from 'node:path'
 import ora from 'ora'
 import fse from 'fs-extra'
+import { glob } from 'glob'
+import ejs from 'ejs'
 
 async function create() {
   const projectTemplate = await select({
@@ -41,12 +43,6 @@ async function create() {
     }
   }
 
-  const templatePath = path.join(pkg.npmFilePath, 'template')
-
-  console.log('templatePath', templatePath)
-  console.log('targetPath', targetPath)
-  console.log('pkg.npmFilePath...', pkg.npmFilePath)
-
   if (!(await pkg.exists())) {
     const spinner = ora('下载模版中...').start()
     await pkg.install()
@@ -62,9 +58,30 @@ async function create() {
   const spinner = ora('创建项目中...').start()
   await sleep(1000)
 
+  const templatePath = path.join(pkg.npmFilePath, 'template')
+  console.log('os.homedir()', os.homedir())
+
+  console.log('templatePath', templatePath)
+  console.log('targetPath', targetPath)
+  console.log('pkg.npmFilePath...', pkg.npmFilePath)
+
   fse.copySync(templatePath, targetPath)
 
   spinner.stop()
+
+  const files = await glob('**', {
+    cwd: targetPath,
+    nodir: true,
+    ignore: 'node_modules/**'
+  })
+
+  for (let i = 0; i < files.length; i++) {
+    const filePath = path.join(targetPath, files[i])
+    const renderResult = await ejs.renderFile(filePath, {
+      projectName
+    })
+    fse.writeFileSync(filePath, renderResult)
+  }
 }
 
 function sleep(timeout: number) {

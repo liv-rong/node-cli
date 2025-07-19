@@ -1,6 +1,6 @@
 {
   "name": "@starry-sky-studio/my-create",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
@@ -17,10 +17,13 @@
   "dependencies": {
     "@inquirer/prompts": "^7.6.0",
     "@starry-sky-studio/my-utils": "workspace:*",
-    "ora": "^8.2.0",
-    "fs-extra": "^11.3.0"
+    "ejs": "^3.1.10",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.3",
+    "ora": "^8.2.0"
   },
   "devDependencies": {
+    "@types/ejs": "^3.1.5",
     "@types/fs-extra": "^11.0.4"
   }
 }
