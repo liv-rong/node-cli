@@ -11,21 +11,22 @@ export interface NpmPackageOptions {
 }
 
 class NpmPackage {
-  name: string
-  version: string = ''
-  targetPath: string
-  storePath: string
+  name: string // 包名
+  version: string = '' // 版本，初始为空
+  targetPath: string // 目标路径
+  storePath: string // 存储路径
 
   constructor(options: NpmPackageOptions) {
     this.targetPath = options.targetPath
     this.name = options.name
-
+    // 设置存储路径为目标路径下的node_modules
     this.storePath = path.resolve(options.targetPath, 'node_modules')
   }
 
+  //  准备工作：创建目录并获取最新版本号
   async prepare() {
     if (!fs.existsSync(this.targetPath)) {
-      fse.mkdirpSync(this.targetPath)
+      fse.mkdirpSync(this.targetPath) // 递归创建目录
     }
     const version = await getLatestVersion(this.name)
     this.version = version
@@ -41,16 +42,20 @@ class NpmPackage {
           version: this.version
         }
       ],
-      registry: getNpmRegistry(),
-      root: this.targetPath
+      registry: getNpmRegistry(), // 获取npm镜像地址
+      root: this.targetPath // 安装到目标路径
     })
   }
 
   get npmFilePath() {
-    return path.resolve(
-      this.storePath,
-      `.store/${this.name.replace('/', '+')}@${this.version}/node_modules/${this.name}`
-    )
+    // 格式：.store/@scope+package@version/node_modules/@scope/package
+    // 正确格式：@scope+package@version
+    if (!this.version) {
+      throw new Error('版本号未初始化，请先调用prepare()')
+    }
+    const storeDir = `${this.name.replace('/', '+')}@${this.version}`
+
+    return path.resolve(this.storePath, `.store/${storeDir}/node_modules/${this.name}`)
   }
 
   async exists() {
